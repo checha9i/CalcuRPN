@@ -28,31 +28,64 @@ String ver=" ";
         try  {x = Double.parseDouble(tk);}
         catch (Exception e)  {
             y = evalrpn(tok);  x = evalrpn(tok);
-            if(tk.equals("^2")) y=y*y;
+
+
+
             if      (tk.equals("+"))  x += y;
             else if (tk.equals("-"))  x -= y;
             else if (tk.equals("*"))  x *= y;
             else if (tk.equals("/"))  x /= y;
             else if(tk.equals("^")) {
-                double temp=x;
-                for(int i=1;i<y;i++){
 
-                                      x=x*temp;
-                                  }
+                double temp= Math.pow(x, y);
+                x=temp;
+            }
+        else if(tk.equals("^2"))  {
+y=2;
+                double temp= Math.pow(x, y);
+                x=temp;
 
-                }
+            }
+            else if(tk.equals("Sen")){
+                double temp = Math.toRadians(x);
+               x= Math.sin (temp);
+
+
+            }
+            else if(tk.equals("Cos")){
+                double temp = Math.toRadians(x);
+                x= Math.cos(temp);
+            }
+            else if(tk.equals("Tan")){
+                double temp = Math.toRadians(x);
+                x= Math.tan(temp);
+            }
+            else if(tk.equals("2√")){
+
+                y= Math.sqrt(x);
+                        x=y;
+            }
+            else if(tk.equals("√")){
+double pot=1/y;
+                double temp= Math.pow(x, pot);
+                x=temp;
+            }
+            else if(tk.equals("Log")){
+
+                y= Math.log(x);
+                x=y;
+            }
+
 
             else throw new Exception();
-
         }
-
         return x;
     }
    public Principal()throws IOException {
 
         //Panel
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 300, 300);
+        setBounds(100, 100, 300, 310);
        JPanel contentPane = new JPanel();
         contentPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"201313819"));
         setContentPane(contentPane);
@@ -95,6 +128,9 @@ String ver=" ";
        JButton siete = new JButton("7");
        siete.setBounds(5, 235, 50, 20);
        contentPane.add(siete);
+        JButton espacio = new JButton("Espacio");
+       espacio.setBounds(5, 255, 250, 15);
+       contentPane.add(espacio);
 
        JButton ocho = new JButton("8");
        ocho.setBounds(55, 235, 50, 20);
@@ -106,7 +142,7 @@ String ver=" ";
 
        //Espacio para mostrar
        final TextField mostrar = new TextField();
-       mostrar.setBounds(5,15,250,40);
+       mostrar.setBounds(5,15,250,100);
        contentPane.add(mostrar);
 
        //operadores
@@ -160,11 +196,29 @@ String ver=" ";
        contentPane.add(punto);
 
 
+       JButton seno = new JButton("Sen");
+       seno.setBounds(159, 155, 60, 20);
+       contentPane.add(seno);
+
+
+       JButton cos = new JButton("Cos");
+       cos.setBounds(219, 155, 60, 20);
+       contentPane.add(cos);
+
+
+       JButton tan = new JButton("Tan");
+       tan.setBounds(5, 135, 60, 20);
+       contentPane.add(tan);
+
+       JButton log = new JButton("Ln");
+       log.setBounds(65, 135, 60, 20);
+       contentPane.add(log);
+
         //Accion botones
         uno.addActionListener(new ActionListener(){
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 1";
+               ver=ver+"1";
 mostrar.setText(ver);
            }
        });
@@ -172,7 +226,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-              ver=ver+" 2";
+              ver=ver+"2";
                mostrar.setText(ver);
            }
        });
@@ -180,7 +234,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 3";
+               ver=ver+"3";
                mostrar.setText(ver);
            }
        });
@@ -188,7 +242,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 4";
+               ver=ver+"4";
                mostrar.setText(ver);
            }
        });
@@ -196,7 +250,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 5";
+               ver=ver+"5";
                mostrar.setText(ver);
            }
        });
@@ -204,7 +258,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 6";
+               ver=ver+"6";
                mostrar.setText(ver);
            }
        });
@@ -212,7 +266,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 7";
+               ver=ver+"7";
                mostrar.setText(ver);
            }
        });
@@ -220,7 +274,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 8";
+               ver=ver+"8";
                mostrar.setText(ver);
            }
        });
@@ -228,7 +282,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" 9";
+               ver=ver+"9";
                mostrar.setText(ver);
            }
        });
@@ -236,7 +290,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" +";
+               ver=ver+"+";
                mostrar.setText(ver);
            }
        });
@@ -244,7 +298,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" -";
+               ver=ver+"-";
                mostrar.setText(ver);
            }
        });
@@ -260,7 +314,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" *";
+               ver=ver+"*";
                mostrar.setText(ver);
            }
        });
@@ -268,7 +322,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" /";
+               ver=ver+"/";
                mostrar.setText(ver);
            }
        });
@@ -277,7 +331,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver = ver + " ^2";
+               ver = ver + "^2";
                mostrar.setText(ver);
            }
        });
@@ -286,7 +340,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver = ver + " ^";
+               ver = ver + "^";
                mostrar.setText(ver);
            }
        });
@@ -295,7 +349,7 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver = ver + " 2√";
+               ver = ver + "2√";
                mostrar.setText(ver);
            }
        });
@@ -304,14 +358,54 @@ mostrar.setText(ver);
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver=ver+" √";
+               ver=ver+"√";
                mostrar.setText(ver);
              }});
        punto.addActionListener(new ActionListener() {
 
            @Override
            public void actionPerformed(ActionEvent actionEvent) {
-               ver = ver + " .";
+               ver = ver + ".";
+               mostrar.setText(ver);
+           }
+       });
+       seno.addActionListener(new ActionListener() {
+
+           @Override
+           public void actionPerformed(ActionEvent actionEvent) {
+               ver = ver + "Sen";
+               mostrar.setText(ver);
+           }
+       });
+       cos.addActionListener(new ActionListener() {
+
+           @Override
+           public void actionPerformed(ActionEvent actionEvent) {
+               ver = ver + "Cos";
+               mostrar.setText(ver);
+           }
+       });
+       tan.addActionListener(new ActionListener() {
+
+           @Override
+           public void actionPerformed(ActionEvent actionEvent) {
+               ver = ver + "Tan";
+               mostrar.setText(ver);
+           }
+       });
+       espacio.addActionListener(new ActionListener() {
+
+           @Override
+           public void actionPerformed(ActionEvent actionEvent) {
+               ver = ver + " ";
+               mostrar.setText(ver);
+           }
+       });
+       log.addActionListener(new ActionListener() {
+
+           @Override
+           public void actionPerformed(ActionEvent actionEvent) {
+               ver = ver + "Log";
                mostrar.setText(ver);
            }
        });
